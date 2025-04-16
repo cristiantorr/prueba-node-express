@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -24,16 +23,16 @@ model User {
 
 model Car {
   id          Int    @id @default(autoincrement())
-  modelo      String @db.VarChar(30)
-  descripcion String @db.VarChar(100)
-  precio      Float
-  kilometraje Int
+  model       String @db.VarChar(30)
+  description String @db.VarChar(100)
+  price       Float
+  mileage     Int
   brandId     Int
   brand       Brand  @relation(fields: [brandId], references: [id])
 }
 
 model Brand {
-  id    Int    @id
-  nombre String @db.VarChar(20)
-  cars   Car[]
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(20) @unique
+  cars  Car[]
 }

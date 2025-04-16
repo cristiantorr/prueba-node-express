@@ -85,4 +85,4 @@ Si deseas contribuir al proyecto, por favor:
 
 ## Licencia
 
-ISC
+MIT

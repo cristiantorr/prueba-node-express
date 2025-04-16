@@ -137,6 +137,12 @@ exports.Prisma.BrandScalarFieldEnum = {
   nombre: 'nombre'
 };
 
+exports.Prisma.OtraScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -156,11 +162,17 @@ exports.Prisma.BrandOrderByRelevanceFieldEnum = {
   nombre: 'nombre'
 };
 
+exports.Prisma.otraOrderByRelevanceFieldEnum = {
+  name: 'name',
+  email: 'email'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Car: 'Car',
-  Brand: 'Brand'
+  Brand: 'Brand',
+  otra: 'otra'
 };
 
 /**

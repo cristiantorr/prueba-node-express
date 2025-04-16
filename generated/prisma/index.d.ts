@@ -28,6 +28,11 @@ export type Car = $Result.DefaultSelection<Prisma.$CarPayload>
  * 
  */
 export type Brand = $Result.DefaultSelection<Prisma.$BrandPayload>
+/**
+ * Model otra
+ * 
+ */
+export type otra = $Result.DefaultSelection<Prisma.$otraPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get brand(): Prisma.BrandDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.otra`: Exposes CRUD operations for the **otra** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Otras
+    * const otras = await prisma.otra.findMany()
+    * ```
+    */
+  get otra(): Prisma.otraDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Car: 'Car',
-    Brand: 'Brand'
+    Brand: 'Brand',
+    otra: 'otra'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "car" | "brand"
+      modelProps: "user" | "car" | "brand" | "otra"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -846,6 +862,72 @@ export namespace Prisma {
           }
         }
       }
+      otra: {
+        payload: Prisma.$otraPayload<ExtArgs>
+        fields: Prisma.otraFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.otraFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.otraFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>
+          }
+          findFirst: {
+            args: Prisma.otraFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.otraFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>
+          }
+          findMany: {
+            args: Prisma.otraFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>[]
+          }
+          create: {
+            args: Prisma.otraCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>
+          }
+          createMany: {
+            args: Prisma.otraCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.otraDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>
+          }
+          update: {
+            args: Prisma.otraUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>
+          }
+          deleteMany: {
+            args: Prisma.otraDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.otraUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.otraUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$otraPayload>
+          }
+          aggregate: {
+            args: Prisma.OtraAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOtra>
+          }
+          groupBy: {
+            args: Prisma.otraGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OtraGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.otraCountArgs<ExtArgs>
+            result: $Utils.Optional<OtraCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -933,6 +1015,7 @@ export namespace Prisma {
     user?: UserOmit
     car?: CarOmit
     brand?: BrandOmit
+    otra?: otraOmit
   }
 
   /* Types for Logging */
@@ -3894,6 +3977,900 @@ export namespace Prisma {
 
 
   /**
+   * Model otra
+   */
+
+  export type AggregateOtra = {
+    _count: OtraCountAggregateOutputType | null
+    _avg: OtraAvgAggregateOutputType | null
+    _sum: OtraSumAggregateOutputType | null
+    _min: OtraMinAggregateOutputType | null
+    _max: OtraMaxAggregateOutputType | null
+  }
+
+  export type OtraAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type OtraSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type OtraMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+  }
+
+  export type OtraMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+  }
+
+  export type OtraCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    _all: number
+  }
+
+
+  export type OtraAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type OtraSumAggregateInputType = {
+    id?: true
+  }
+
+  export type OtraMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+  }
+
+  export type OtraMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+  }
+
+  export type OtraCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    _all?: true
+  }
+
+  export type OtraAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which otra to aggregate.
+     */
+    where?: otraWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of otras to fetch.
+     */
+    orderBy?: otraOrderByWithRelationInput | otraOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: otraWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` otras from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` otras.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned otras
+    **/
+    _count?: true | OtraCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OtraAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OtraSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OtraMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OtraMaxAggregateInputType
+  }
+
+  export type GetOtraAggregateType<T extends OtraAggregateArgs> = {
+        [P in keyof T & keyof AggregateOtra]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOtra[P]>
+      : GetScalarType<T[P], AggregateOtra[P]>
+  }
+
+
+
+
+  export type otraGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: otraWhereInput
+    orderBy?: otraOrderByWithAggregationInput | otraOrderByWithAggregationInput[]
+    by: OtraScalarFieldEnum[] | OtraScalarFieldEnum
+    having?: otraScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OtraCountAggregateInputType | true
+    _avg?: OtraAvgAggregateInputType
+    _sum?: OtraSumAggregateInputType
+    _min?: OtraMinAggregateInputType
+    _max?: OtraMaxAggregateInputType
+  }
+
+  export type OtraGroupByOutputType = {
+    id: number
+    name: string
+    email: string
+    _count: OtraCountAggregateOutputType | null
+    _avg: OtraAvgAggregateOutputType | null
+    _sum: OtraSumAggregateOutputType | null
+    _min: OtraMinAggregateOutputType | null
+    _max: OtraMaxAggregateOutputType | null
+  }
+
+  type GetOtraGroupByPayload<T extends otraGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OtraGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OtraGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OtraGroupByOutputType[P]>
+            : GetScalarType<T[P], OtraGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type otraSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+  }, ExtArgs["result"]["otra"]>
+
+
+
+  export type otraSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+  }
+
+  export type otraOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email", ExtArgs["result"]["otra"]>
+
+  export type $otraPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "otra"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+    }, ExtArgs["result"]["otra"]>
+    composites: {}
+  }
+
+  type otraGetPayload<S extends boolean | null | undefined | otraDefaultArgs> = $Result.GetResult<Prisma.$otraPayload, S>
+
+  type otraCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<otraFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OtraCountAggregateInputType | true
+    }
+
+  export interface otraDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['otra'], meta: { name: 'otra' } }
+    /**
+     * Find zero or one Otra that matches the filter.
+     * @param {otraFindUniqueArgs} args - Arguments to find a Otra
+     * @example
+     * // Get one Otra
+     * const otra = await prisma.otra.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends otraFindUniqueArgs>(args: SelectSubset<T, otraFindUniqueArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Otra that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {otraFindUniqueOrThrowArgs} args - Arguments to find a Otra
+     * @example
+     * // Get one Otra
+     * const otra = await prisma.otra.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends otraFindUniqueOrThrowArgs>(args: SelectSubset<T, otraFindUniqueOrThrowArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Otra that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {otraFindFirstArgs} args - Arguments to find a Otra
+     * @example
+     * // Get one Otra
+     * const otra = await prisma.otra.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends otraFindFirstArgs>(args?: SelectSubset<T, otraFindFirstArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Otra that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {otraFindFirstOrThrowArgs} args - Arguments to find a Otra
+     * @example
+     * // Get one Otra
+     * const otra = await prisma.otra.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends otraFindFirstOrThrowArgs>(args?: SelectSubset<T, otraFindFirstOrThrowArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Otras that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {otraFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Otras
+     * const otras = await prisma.otra.findMany()
+     * 
+     * // Get first 10 Otras
+     * const otras = await prisma.otra.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const otraWithIdOnly = await prisma.otra.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends otraFindManyArgs>(args?: SelectSubset<T, otraFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Otra.
+     * @param {otraCreateArgs} args - Arguments to create a Otra.
+     * @example
+     * // Create one Otra
+     * const Otra = await prisma.otra.create({
+     *   data: {
+     *     // ... data to create a Otra
+     *   }
+     * })
+     * 
+     */
+    create<T extends otraCreateArgs>(args: SelectSubset<T, otraCreateArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Otras.
+     * @param {otraCreateManyArgs} args - Arguments to create many Otras.
+     * @example
+     * // Create many Otras
+     * const otra = await prisma.otra.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends otraCreateManyArgs>(args?: SelectSubset<T, otraCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Otra.
+     * @param {otraDeleteArgs} args - Arguments to delete one Otra.
+     * @example
+     * // Delete one Otra
+     * const Otra = await prisma.otra.delete({
+     *   where: {
+     *     // ... filter to delete one Otra
+     *   }
+     * })
+     * 
+     */
+    delete<T extends otraDeleteArgs>(args: SelectSubset<T, otraDeleteArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Otra.
+     * @param {otraUpdateArgs} args - Arguments to update one Otra.
+     * @example
+     * // Update one Otra
+     * const otra = await prisma.otra.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends otraUpdateArgs>(args: SelectSubset<T, otraUpdateArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Otras.
+     * @param {otraDeleteManyArgs} args - Arguments to filter Otras to delete.
+     * @example
+     * // Delete a few Otras
+     * const { count } = await prisma.otra.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends otraDeleteManyArgs>(args?: SelectSubset<T, otraDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Otras.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {otraUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Otras
+     * const otra = await prisma.otra.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends otraUpdateManyArgs>(args: SelectSubset<T, otraUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Otra.
+     * @param {otraUpsertArgs} args - Arguments to update or create a Otra.
+     * @example
+     * // Update or create a Otra
+     * const otra = await prisma.otra.upsert({
+     *   create: {
+     *     // ... data to create a Otra
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Otra we want to update
+     *   }
+     * })
+     */
+    upsert<T extends otraUpsertArgs>(args: SelectSubset<T, otraUpsertArgs<ExtArgs>>): Prisma__otraClient<$Result.GetResult<Prisma.$otraPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Otras.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {otraCountArgs} args - Arguments to filter Otras to count.
+     * @example
+     * // Count the number of Otras
+     * const count = await prisma.otra.count({
+     *   where: {
+     *     // ... the filter for the Otras we want to count
+     *   }
+     * })
+    **/
+    count<T extends otraCountArgs>(
+      args?: Subset<T, otraCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OtraCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Otra.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtraAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OtraAggregateArgs>(args: Subset<T, OtraAggregateArgs>): Prisma.PrismaPromise<GetOtraAggregateType<T>>
+
+    /**
+     * Group by Otra.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {otraGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends otraGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: otraGroupByArgs['orderBy'] }
+        : { orderBy?: otraGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, otraGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOtraGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the otra model
+   */
+  readonly fields: otraFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for otra.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__otraClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the otra model
+   */
+  interface otraFieldRefs {
+    readonly id: FieldRef<"otra", 'Int'>
+    readonly name: FieldRef<"otra", 'String'>
+    readonly email: FieldRef<"otra", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * otra findUnique
+   */
+  export type otraFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * Filter, which otra to fetch.
+     */
+    where: otraWhereUniqueInput
+  }
+
+  /**
+   * otra findUniqueOrThrow
+   */
+  export type otraFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * Filter, which otra to fetch.
+     */
+    where: otraWhereUniqueInput
+  }
+
+  /**
+   * otra findFirst
+   */
+  export type otraFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * Filter, which otra to fetch.
+     */
+    where?: otraWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of otras to fetch.
+     */
+    orderBy?: otraOrderByWithRelationInput | otraOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for otras.
+     */
+    cursor?: otraWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` otras from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` otras.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of otras.
+     */
+    distinct?: OtraScalarFieldEnum | OtraScalarFieldEnum[]
+  }
+
+  /**
+   * otra findFirstOrThrow
+   */
+  export type otraFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * Filter, which otra to fetch.
+     */
+    where?: otraWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of otras to fetch.
+     */
+    orderBy?: otraOrderByWithRelationInput | otraOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for otras.
+     */
+    cursor?: otraWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` otras from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` otras.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of otras.
+     */
+    distinct?: OtraScalarFieldEnum | OtraScalarFieldEnum[]
+  }
+
+  /**
+   * otra findMany
+   */
+  export type otraFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * Filter, which otras to fetch.
+     */
+    where?: otraWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of otras to fetch.
+     */
+    orderBy?: otraOrderByWithRelationInput | otraOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing otras.
+     */
+    cursor?: otraWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` otras from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` otras.
+     */
+    skip?: number
+    distinct?: OtraScalarFieldEnum | OtraScalarFieldEnum[]
+  }
+
+  /**
+   * otra create
+   */
+  export type otraCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * The data needed to create a otra.
+     */
+    data: XOR<otraCreateInput, otraUncheckedCreateInput>
+  }
+
+  /**
+   * otra createMany
+   */
+  export type otraCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many otras.
+     */
+    data: otraCreateManyInput | otraCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * otra update
+   */
+  export type otraUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * The data needed to update a otra.
+     */
+    data: XOR<otraUpdateInput, otraUncheckedUpdateInput>
+    /**
+     * Choose, which otra to update.
+     */
+    where: otraWhereUniqueInput
+  }
+
+  /**
+   * otra updateMany
+   */
+  export type otraUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update otras.
+     */
+    data: XOR<otraUpdateManyMutationInput, otraUncheckedUpdateManyInput>
+    /**
+     * Filter which otras to update
+     */
+    where?: otraWhereInput
+    /**
+     * Limit how many otras to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * otra upsert
+   */
+  export type otraUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * The filter to search for the otra to update in case it exists.
+     */
+    where: otraWhereUniqueInput
+    /**
+     * In case the otra found by the `where` argument doesn't exist, create a new otra with this data.
+     */
+    create: XOR<otraCreateInput, otraUncheckedCreateInput>
+    /**
+     * In case the otra was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<otraUpdateInput, otraUncheckedUpdateInput>
+  }
+
+  /**
+   * otra delete
+   */
+  export type otraDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+    /**
+     * Filter which otra to delete.
+     */
+    where: otraWhereUniqueInput
+  }
+
+  /**
+   * otra deleteMany
+   */
+  export type otraDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which otras to delete
+     */
+    where?: otraWhereInput
+    /**
+     * Limit how many otras to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * otra without action
+   */
+  export type otraDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the otra
+     */
+    select?: otraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the otra
+     */
+    omit?: otraOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3936,6 +4913,15 @@ export namespace Prisma {
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
 
 
+  export const OtraScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email'
+  };
+
+  export type OtraScalarFieldEnum = (typeof OtraScalarFieldEnum)[keyof typeof OtraScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -3965,6 +4951,14 @@ export namespace Prisma {
   };
 
   export type BrandOrderByRelevanceFieldEnum = (typeof BrandOrderByRelevanceFieldEnum)[keyof typeof BrandOrderByRelevanceFieldEnum]
+
+
+  export const otraOrderByRelevanceFieldEnum: {
+    name: 'name',
+    email: 'email'
+  };
+
+  export type otraOrderByRelevanceFieldEnum = (typeof otraOrderByRelevanceFieldEnum)[keyof typeof otraOrderByRelevanceFieldEnum]
 
 
   /**
@@ -4147,6 +5141,51 @@ export namespace Prisma {
     nombre?: StringWithAggregatesFilter<"Brand"> | string
   }
 
+  export type otraWhereInput = {
+    AND?: otraWhereInput | otraWhereInput[]
+    OR?: otraWhereInput[]
+    NOT?: otraWhereInput | otraWhereInput[]
+    id?: IntFilter<"otra"> | number
+    name?: StringFilter<"otra"> | string
+    email?: StringFilter<"otra"> | string
+  }
+
+  export type otraOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    _relevance?: otraOrderByRelevanceInput
+  }
+
+  export type otraWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: otraWhereInput | otraWhereInput[]
+    OR?: otraWhereInput[]
+    NOT?: otraWhereInput | otraWhereInput[]
+    name?: StringFilter<"otra"> | string
+  }, "id" | "email">
+
+  export type otraOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    _count?: otraCountOrderByAggregateInput
+    _avg?: otraAvgOrderByAggregateInput
+    _max?: otraMaxOrderByAggregateInput
+    _min?: otraMinOrderByAggregateInput
+    _sum?: otraSumOrderByAggregateInput
+  }
+
+  export type otraScalarWhereWithAggregatesInput = {
+    AND?: otraScalarWhereWithAggregatesInput | otraScalarWhereWithAggregatesInput[]
+    OR?: otraScalarWhereWithAggregatesInput[]
+    NOT?: otraScalarWhereWithAggregatesInput | otraScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"otra"> | number
+    name?: StringWithAggregatesFilter<"otra"> | string
+    email?: StringWithAggregatesFilter<"otra"> | string
+  }
+
   export type UserCreateInput = {
     name: string
     email: string
@@ -4282,6 +5321,45 @@ export namespace Prisma {
   export type BrandUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type otraCreateInput = {
+    name: string
+    email: string
+  }
+
+  export type otraUncheckedCreateInput = {
+    id?: number
+    name: string
+    email: string
+  }
+
+  export type otraUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type otraUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type otraCreateManyInput = {
+    id?: number
+    name: string
+    email: string
+  }
+
+  export type otraUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type otraUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4491,6 +5569,38 @@ export namespace Prisma {
   }
 
   export type BrandSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type otraOrderByRelevanceInput = {
+    fields: otraOrderByRelevanceFieldEnum | otraOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type otraCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+  }
+
+  export type otraAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type otraMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+  }
+
+  export type otraMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+  }
+
+  export type otraSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
